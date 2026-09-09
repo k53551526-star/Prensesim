@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeynep'e Özel 💙</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#03152d,#07528c,#159bd7);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.screen{
+    width:90%;
+    max-width:520px;
+    text-align:center;
+    padding:35px 25px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(15px);
+    border-radius:28px;
+    box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.hidden{
+    display:none;
+}
+
+.big-heart{
+    font-size:65px;
+    animation:beat 1.5s infinite;
+}
+
+h1{
+    font-size:34px;
+    margin:15px 0;
+}
+
+p{
+    font-size:17px;
+    line-height:1.7;
+}
+
+button{
+    margin-top:25px;
+    padding:14px 28px;
+    border:0;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:bold;
+    color:#07528c;
+    background:white;
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(.95);
+}
+
+.counter-title{
+    margin-top:25px;
+    opacity:.8;
+}
+
+#counter{
+    margin-top:8px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.compliment{
+    margin-top:25px;
+    padding:18px;
+    border-radius:18px;
+    background:rgba(255,255,255,.1);
+    line-height:1.7;
+}
+
+.hearts{
+    margin-top:22px;
+    font-size:25px;
+    letter-spacing:5px;
+}
+
+.floating-heart{
+    position:absolute;
+    bottom:-40px;
+    animation:up 7s linear forwards;
+}
+
+@keyframes beat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.15)}
+}
+
+@keyframes up{
+    0%{
+        transform:translateY(0);
+        opacity:0;
+    }
+    20%{opacity:1}
+    100%{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- AÇILIŞ EKRANI -->
+
+<div class="screen" id="welcome">
+
+    <div class="big-heart">💙</div>
+
+    <h1>Zeynep için</h1>
+
+    <p>
+        Sana küçük bir şey hazırladım...
+        <br>
+        Açmak ister misin? 💙
+    </p>
+
+    <button onclick="openSite()">
+        Aç 💙
+    </button>
+
+</div>
+
+
+<!-- ANA SAYFA -->
+
+<div class="screen hidden" id="main">
+
+    <div class="big-heart">💙</div>
+
+    <h1>Zeynep</h1>
+
+    <p>
+        Seni tanıyalı çok uzun zaman olmadı
+        ama kısa zamanda bile bende güzel bir
+        yer edindin. 💙
+    </p>
+
+    <div class="counter-title">
+        Seni tanıyalı geçen süre
+    </div>
+
+    <div id="counter">
+        Hesaplanıyor...
+    </div>
+
+    <div class="compliment">
+        Güzelliğin sadece dış görünüşünde değil,
+        konuşmandaki samimiyette ve seni sen yapan
+        o güzel kalbinde. Seni farklı yapan şey de bu. 💙
+    </div>
+
+    <div class="hearts">
+        💙 💙 💙 💙 💙
+    </div>
+
+</div>
+
+
+<script>
+
+function openSite(){
+
+    document.getElementById("welcome").classList.add("hidden");
+
+    document.getElementById("main").classList.remove("hidden");
+
+}
+
+
+// TANIŞMA TARİHİ
+// 4 Eylül 2026
+
+const tanismaTarihi =
+new Date("2026-09-04T00:00:00");
+
+
+function updateCounter(){
+
+    const now = new Date();
+
+    const difference =
+    now - tanismaTarihi;
+
+    if(difference < 0){
+        document.getElementById("counter").innerHTML =
+        "Yakında 💙";
+        return;
+    }
+
+    const totalSeconds =
+    Math.floor(difference / 1000);
+
+    const days =
+    Math.floor(totalSeconds / 86400);
+
+    const hours =
+    Math.floor((totalSeconds % 86400) / 3600);
+
+    const minutes =
+    Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds =
+    totalSeconds % 60;
+
+    document.getElementById("counter").innerHTML =
+    days + " gün " +
+    hours + " saat " +
+    minutes + " dakika " +
+    seconds + " saniye 💙";
+}
+
+
+setInterval(updateCounter,1000);
+
+updateCounter();
+
+
+function createHeart(){
+
+    const heart =
+    document.createElement("div");
+
+    heart.className =
+    "floating-heart";
+
+    heart.innerHTML =
+    "💙";
+
+    heart.style.left =
+    Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+    (Math.random()*20+15)+"px";
+
+    heart.style.animationDuration =
+    (Math.random()*4+4)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
+}
+
+
+setInterval(createHeart,600);
+
+</script>
+
+</body>
+</html>
